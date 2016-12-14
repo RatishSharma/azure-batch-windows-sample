@@ -163,11 +163,11 @@ def add_tasks(batch_service_client, job_id, input_files,
 
 
 ### **‘À––≤‚ ‘**
+![](https://devstorage.blob.core.chinacloudapi.cn/files/test-result-01.png)
 
+![](https://devstorage.blob.core.chinacloudapi.cn/files/test-result-02.png)
 
+![](https://devstorage.blob.core.chinacloudapi.cn/files/test-result-03.png)
 
-
-
-	```
 
 
