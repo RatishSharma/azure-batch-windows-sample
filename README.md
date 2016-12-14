@@ -7,7 +7,7 @@
 	2. https://www.azure.cn/documentation/articles/batch-python-tutorial/
 
 
-以上资料由微软官方提供，但是无法直接在China Azure环境下直接使用，主要问题如下
+以上资料由微软官方提供，但是无法直接在China Azure环境下直接使用，主要问题如下：
 
 	1. SKU方式不支持中国区(中国无法访问Azure虚拟机应用商店映像列表，已经向产品组提交Bug)，因此无法基于这种方式创建Linux Batch Pool
 	  
