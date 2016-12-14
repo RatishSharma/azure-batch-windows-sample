@@ -1,13 +1,16 @@
-**本文章将介绍如何基于Cloud Service配置Windows Batch Python计算环境，并通过Python进行批处理作业**
+**Windows Batch Python 示例**
 
 ### **背景描述**
-我们在研究《Azure Batch Python 客户端入门》，参考了以下资料：
-https://docs.microsoft.com/zh-cn/azure/batch/batch-python-tutorial
-https://www.azure.cn/documentation/articles/batch-python-tutorial/
+最近，在China Azure环境下运行Batch Python示例，遇到较多问题。为此，我们花费了较多的时间进行测试以解决这个问题，这里需要感谢微软的Allan、21V的George、Kevin共同的努力。
 
-建立Batch Pool计算节点，主要有以下两种方式来：
+	1. https://docs.microsoft.com/zh-cn/azure/batch/batch-python-tutorial
+	2. https://www.azure.cn/documentation/articles/batch-python-tutorial/
 
-	1. SKU方式不支持中国区(中国无法访问Azure虚拟机应用商店映像列表)，因此无法基于这种方式创建Linux Batch Pool
+
+以上资料由微软官方提供，但是无法直接在China Azure环境下直接使用，主要问题如下
+
+	1. SKU方式不支持中国区(中国无法访问Azure虚拟机应用商店映像列表，已经向产品组提交Bug)，因此无法基于这种方式创建Linux Batch Pool
+	  
 
 ``` python
  	new_pool = batch.models.PoolAddParameter(
@@ -46,7 +49,7 @@ new_pool = batch.models.PoolAddParameter(
 
 ### **前置条件**
 
-以下依赖环境是运行示例必须配置的环境，否则程序无法运行通过：
+以下是本地运行实例、Batch节点依赖的运行时环境：
 
 	1. python 2.7 或 3.3+ 
 	2. pip 9.0.1  
@@ -160,14 +163,56 @@ def add_tasks(batch_service_client, job_id, input_files,
 
 ```
 
-
-
 ### **运行测试**
-![](https://devstorage.blob.core.chinacloudapi.cn/files/test-result-01.png)
+Sample start: 2016-12-14 05:34:52
 
-![](https://devstorage.blob.core.chinacloudapi.cn/files/test-result-02.png)
+Uploading file C:\Users\kevin\Desktop\george-python-test\azure-batch-samples-mas
+ter\Python\Batch\article_samples\python_tutorial_task.py to container [applicati
+on]...
+Uploading file C:\Users\kevin\Desktop\george-python-test\azure-batch-samples-mas
+ter\Python\Batch\article_samples\PrepPython35.ps1 to container [application]...
+Uploading file C:\Users\kevin\Desktop\george-python-test\azure-batch-samples-mas
+ter\Python\Batch\article_samples\data\taskdata1.txt to container [input]...
+Uploading file C:\Users\kevin\Desktop\george-python-test\azure-batch-samples-mas
+ter\Python\Batch\article_samples\data\taskdata2.txt to container [input]...
+Uploading file C:\Users\kevin\Desktop\george-python-test\azure-batch-samples-mas
+ter\Python\Batch\article_samples\data\taskdata3.txt to container [input]...
+Creating pool [PythonTutorialPool01]...
+Creating job [PythonTutorialJob01]...
+Adding 3 tasks to job [PythonTutorialJob01]...
+Monitoring all tasks for 'Completed' state, timeout in 0:30:00..................
+................................................................................
+................................................................................
+................................................................................
+................................................................................
+....................................................................
+  Success! All tasks reached the 'Completed' state within the specified timeout
+period.
+C:\Users\kevin
+Downloading all files from container [output]...
+  Downloaded blob [taskdata1_OUTPUT.txt] from container [output] to C:\Users\kev
+in\taskdata1_OUTPUT.txt
+  Downloaded blob [taskdata2_OUTPUT.txt] from container [output] to C:\Users\kev
+in\taskdata2_OUTPUT.txt
+  Downloaded blob [taskdata3_OUTPUT.txt] from container [output] to C:\Users\kev
+in\taskdata3_OUTPUT.txt
+  Download complete!
+Deleting containers...
 
-![](https://devstorage.blob.core.chinacloudapi.cn/files/test-result-03.png)
+Sample end: 2016-12-14 05:42:20
+Elapsed time: 0:07:28
 
+Delete job? [Y/n]
 
+*********************************************************************************************
 
+Word	Count
+------------------------------
+to:	18
+and:	17
+you:	14
+------------------------------
+Node: tvm-884213370_1-20161214t053541z
+Task: topNtask0
+Job:  PythonTutorialJob01
+Pool: PythonTutorialPool01
